@@ -4,9 +4,9 @@ using System.Collections;
 ﻿using UnityEditor;
 ﻿using UnityEngine;
 
-namespace DT.ParallaxBGObjects {
+namespace DT.ParallaxBackgrounds {
 	[ExecuteInEditMode]
-	public class ParallaxBGObject : MonoBehaviour {
+	public class ParallaxBGRendererInstance2D : RendererInstance2D {
 		// PRAGMA MARK - INTERFACE
 		public int Depth {
 			get { return _depth; }
@@ -40,9 +40,6 @@ namespace DT.ParallaxBGObjects {
 			set {
 				Undo.RecordObject(this, "ChangeMaxDepth");
 				_maxDepth = value;
-				this.DoActionOnChildSpriteRenderers(renderer => {
-						renderer.material.SetFloat("_MaxDepth", _maxDepth);
-					});
 			}
 		}
 		
@@ -51,9 +48,14 @@ namespace DT.ParallaxBGObjects {
 			set {
 				Undo.RecordObject(this, "ChangeColorBlendScale");
 				_colorBlendScale = value;
-				this.DoActionOnChildSpriteRenderers(renderer => {
-						renderer.material.SetFloat("_ColorBlendScale", _colorBlendScale);
-					});
+			}
+		}
+		
+		public Color ColorToBlendTo {
+			get { return _colorToBlendTo; }
+			set {
+				Undo.RecordObject(this, "ChangeColorToBlendTo");
+				_colorToBlendTo = value;
 			}
 		}
 		
@@ -77,7 +79,23 @@ namespace DT.ParallaxBGObjects {
 		[SerializeField]
 		protected float _colorBlendScale = 1.0f;
 		[SerializeField]
+		protected Color _colorToBlendTo = Color.white;
+		[SerializeField]
 		protected float _sizeReductionScale = 0.5f;
+		
+		protected override string ShaderName() {
+			return "Sprites/Default-BackgroundArt";
+		}
+		
+		protected void Update() {
+			if (!Application.isPlaying) {
+			  this.MaterialInstance.SetFloat("_MaxDepth", _maxDepth);
+				this.MaterialInstance.SetFloat("_ColorBlendScale", _colorBlendScale);
+				this.MaterialInstance.SetColor("_ColorToBlendTo", _colorToBlendTo);
+				
+				this.LateUpdate();
+			}
+		}
 		
 		protected void LateUpdate() {
 			Vector3 cameraPosition = Camera.main.transform.position;
@@ -89,12 +107,6 @@ namespace DT.ParallaxBGObjects {
 			foreach (Transform child in transform) {
 				child.transform.localPosition = position;
 				child.transform.localScale = child.transform.localScale.SetXY(size, size);
-			}
-		}
-		
-		protected void OnDrawGizmos() {
-			if (!Application.isPlaying) {
-				this.LateUpdate();
 			}
 		}
 		

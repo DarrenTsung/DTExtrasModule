@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace DT {
 	[ExecuteInEditMode]
-	public class PulseShaderRIC2D : RendererInstanceComponent2D {
+	public class PulseShaderRendererInstance2D : RendererInstance2D {
 		// PRAGMA MARK - INTERFACE 
 		public bool Pulsing {
 			get { return _pulsing; }

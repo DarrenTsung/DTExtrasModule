@@ -3,7 +3,7 @@ using System.Collections;
 ﻿using UnityEngine;
 
 namespace DT {
-	public class RendererInstanceComponent2D : RendererInstanceComponent {
+	public class RendererInstance2D : RendererInstance {
 		// PRAGMA MARK - INTERFACE
 		public Texture2D MainTexture {
 			get { return _texture; }

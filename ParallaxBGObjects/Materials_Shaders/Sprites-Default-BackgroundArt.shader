@@ -5,8 +5,9 @@ Shader "Sprites/Default-BackgroundArt"
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
-		_FogSubtractedColor ("Fog Subtracted Color", Color) = (0, 0, 0, 1)
 		_MaxDepth ("Max Depth", float) = 100.0
+		_ColorBlendScale ("Color Blend Scale", float) = 1.0
+		_ColorToBlendTo ("Color To Blend To", Color) = (1,1,1,1)
 	}
 
 	SubShader
@@ -49,38 +50,34 @@ Shader "Sprites/Default-BackgroundArt"
 			};
 			
 			fixed4 _Color;
-			fixed4 _FogSubtractedColor;
 			float _MaxDepth;
+			float _ColorBlendScale;
 
 			v2f vert(appdata_t IN)
 			{
 				v2f OUT;
 				float4 worldPos = mul(_Object2World, IN.vertex);
-				float depth = min(1.0f, worldPos.z / _MaxDepth);
-				
-				float2 parallaxTranslate = _WorldSpaceCameraPos.xy * depth;
-				
-				/*worldPos.xy += parallaxTranslate.xy;
-				float4 translatedVertex = mul(_World2Object, worldPos);*/
+				float depth = clamp(worldPos.z / _MaxDepth, 0.0f, 1.0f);
 				OUT.fogDepth = depth;
 				
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
 				OUT.texcoord = IN.texcoord;
 				OUT.color = IN.color * _Color;
 				#ifdef PIXELSNAP_ON
-				OUT.vertex = UnityPixelSnap (OUT.vertex);
+				OUT.vertex = UnityPixelSnap(OUT.vertex);
 				#endif
 
 				return OUT;
 			}
 
 			sampler2D _MainTex;
+			fixed4 _ColorToBlendTo;
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				float2 uv = IN.texcoord;
 				fixed4 c = tex2D(_MainTex, uv) * IN.color;
-				c -= _FogSubtractedColor * IN.fogDepth;
+				c = fixed4(lerp(c.rgb, _ColorToBlendTo.rgb, IN.fogDepth * _ColorBlendScale), c.a);
 				
 				c.rgb *= c.a;
 				return c;
