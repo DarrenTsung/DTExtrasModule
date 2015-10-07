@@ -19,7 +19,7 @@ namespace DT {
 			return "Sprites/Default-BurnShader";
 		}
 		
-		protected void Update() {
+		protected override void UpdateMaterial() {
 			this.MaterialInstance.SetTexture("_DissolveMap", _dissolveMap); 
 			this.MaterialInstance.SetFloat("_DissolveAmount", _dissolveAmount); 
 			this.MaterialInstance.SetTexture("_BurnRampTex", _burnRampTexture); 

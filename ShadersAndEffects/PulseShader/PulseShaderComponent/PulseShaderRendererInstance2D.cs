@@ -28,7 +28,7 @@ namespace DT {
 			return "Sprites/Default-PulseShader";
 		}
 		
-		protected void Update() {
+		protected override void UpdateMaterial() {
 			this.MaterialInstance.SetInt("_Pulsing", (_pulsing) ? 1 : 0); 
 			this.MaterialInstance.SetFloat("_PulseSpeed", _pulseSpeed); 
 			this.MaterialInstance.SetColor("_PulseColor", _pulseColor);

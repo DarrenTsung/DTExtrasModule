@@ -87,20 +87,22 @@ namespace DT.ParallaxBackgrounds {
 			return "Sprites/Default-BackgroundArt";
 		}
 		
-		protected void Update() {
-			if (!Application.isPlaying) {
-			  this.MaterialInstance.SetFloat("_MaxDepth", _maxDepth);
-				this.MaterialInstance.SetFloat("_ColorBlendScale", _colorBlendScale);
-				this.MaterialInstance.SetColor("_ColorToBlendTo", _colorToBlendTo);
-				
-				this.LateUpdate();
-			}
+		protected override void UpdateMaterial() {
+		  this.MaterialInstance.SetFloat("_MaxDepth", _maxDepth);
+			this.MaterialInstance.SetFloat("_ColorBlendScale", _colorBlendScale);
+			this.MaterialInstance.SetColor("_ColorToBlendTo", _colorToBlendTo);
 		}
 		
 		protected void LateUpdate() {
 			Vector3 cameraPosition = Camera.main.transform.position;
 			
 			this.SetChildren(cameraPosition * this.RelativeDepth, (1.0f - _sizeReductionScale * this.RelativeDepth));
+		}
+		
+		protected void OnDrawGizmos() {
+			if (!Application.isPlaying) {
+				this.LateUpdate();
+			}
 		}
 		
 		protected void SetChildren(Vector2 position, float size) {

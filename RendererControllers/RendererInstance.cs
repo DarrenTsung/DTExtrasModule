@@ -3,6 +3,7 @@ using System.Collections;
 ﻿using UnityEngine;
 
 namespace DT {
+	[ExecuteInEditMode]
 	public class RendererInstance : MonoBehaviour {
 		// PRAGMA MARK - INTERNAL
 		protected Renderer[] Renderers {
@@ -27,17 +28,40 @@ namespace DT {
 			}
 		}
 		
+		[SerializeField]
+		protected Material _material;
+		[SerializeField]
+		protected Renderer[] _renderers;
+		
+		protected const float _updateMaterialSpeed = 0.2f;
+		
 		protected virtual void OnDisable() {
 			GameObject.DestroyImmediate(_material);
+		}
+		
+		protected virtual void Start() {
+			this.StartCoroutine(this.UpdateMaterialOnLoop());
+		}
+		
+		protected virtual void Update() {
+			if (!Application.isPlaying) {
+				this.UpdateMaterial();
+			}
+		}
+		
+		protected IEnumerator UpdateMaterialOnLoop() {
+			while (true) {
+				this.UpdateMaterial();
+				yield return new WaitForSeconds(_updateMaterialSpeed);
+			}
+		}
+		
+		protected virtual void UpdateMaterial() {
+			// do nothing in base
 		}
 		
 		protected virtual string ShaderName() {
 			return "Sprites/Default";
 		}
-		
-		[SerializeField]
-		protected Material _material;
-		[SerializeField]
-		protected Renderer[] _renderers;
 	}
 }
