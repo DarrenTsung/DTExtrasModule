@@ -1,5 +1,7 @@
 ﻿using DT;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 ﻿using UnityEngine;
 
 namespace DT {
@@ -8,10 +10,7 @@ namespace DT {
 		// PRAGMA MARK - INTERNAL
 		protected Renderer[] Renderers {
 			get { 
-				if (_renderers == null || _renderers.Length == 0) {
-					_renderers = this.GetComponentsInChildren<Renderer>(); 
-				}
-				return _renderers;
+				return this.GetComponentsInChildren<Renderer>(); 
 			}
 		}
 		
@@ -21,7 +20,7 @@ namespace DT {
 					_material = new Material(Shader.Find(this.ShaderName()));
 					_material.hideFlags = HideFlags.HideAndDontSave;
 					foreach (Renderer r in this.Renderers) {
-						r.sharedMaterial = _material;
+						r.sharedMaterial = this.MaterialInstance;
 					}
 				}
 				return _material;
@@ -30,8 +29,6 @@ namespace DT {
 		
 		[SerializeField]
 		protected Material _material;
-		[SerializeField]
-		protected Renderer[] _renderers;
 		
 		protected const float _updateMaterialSpeed = 0.2f;
 		
