@@ -4,17 +4,12 @@ using System.Collections;
 
 namespace DT {
 	public class RendererInstance2D : RendererInstance {
-		// PRAGMA MARK - INTERFACE
-		public Texture2D MainTexture {
-			get { return _texture; }
-			set { 
-				_texture = value;
-				this.MaterialInstance.SetTexture("_MainTex", _texture); 
-			}
-		}
-			
 		// PRAGMA MARK - INTERNAL
 		[SerializeField]
-		protected Texture2D _texture;
+		protected Texture2D _mainTexture;
+		
+		protected override void UpdateMaterial() {
+			this.MaterialInstance.SetTexture("_MainTex", _mainTexture); 
+		}
 	}
 }
