@@ -28,16 +28,26 @@ namespace DT {
 		
 		protected virtual void Awake() {
 			this.UpdateMaterial();
+			this.RegisterNotifications();
 		}
 		
 		protected virtual void OnDisable() {
 			if (_material != null) {
 				GameObject.DestroyImmediate(_material);
 			}
+			this.RemoveNotifications();
 		}
 		
 		protected virtual void OnValidate() {
 			this.UpdateMaterial();
+		}
+		
+		protected virtual void RegisterNotifications() {
+			// do nothing
+		}
+		
+		protected virtual void RemoveNotifications() {
+			// do nothing
 		}
 		
 		protected virtual void UpdateMaterial() {

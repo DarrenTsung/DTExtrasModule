@@ -5,6 +5,20 @@ using UnityEngine;
 namespace DT {
 	[ExecuteInEditMode]
 	public class ChromaticAberrationEffect : ImageEffectInstance, ICustomEditor {
+		// Example Tweening 
+		// this.AberrationOffsetTween(from: 1.0f, to: 0.0f, duration: 0.3f)
+		// 	.SetEaseType(EaseType.ElasticOut)
+		// 	.Start();
+		
+		// PRAGMA MARK - INTERFACE
+		public float AberrationOffset {
+			get { return _aberrationOffset; }
+			set { 
+				_aberrationOffset = value; 
+				this.UpdateMaterial();
+			}
+		}
+		
 		// PRAGMA MARK - INTERNAL
 		[SerializeField, Range(0.0f, 3.0f)]
 		protected float _aberrationOffset = 1.0f;
