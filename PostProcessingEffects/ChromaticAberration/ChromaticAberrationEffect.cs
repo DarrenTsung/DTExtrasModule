@@ -10,7 +10,7 @@ namespace DT {
 		// 	.SetEaseType(EaseType.ElasticOut)
 		// 	.Start();
 		
-		// PRAGMA MARK - INTERFACE
+		// PRAGMA MARK - Interface
 		public float AberrationOffset {
 			get { return _aberrationOffset; }
 			set { 
@@ -19,7 +19,7 @@ namespace DT {
 			}
 		}
 		
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		[SerializeField, Range(0.0f, 3.0f)]
 		protected float _aberrationOffset = 1.0f;
 		[SerializeField, LocalVectorInspectable]

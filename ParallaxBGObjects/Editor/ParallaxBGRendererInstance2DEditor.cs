@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace DT.ParallaxBackgrounds {
 	[CustomEditor(typeof(ParallaxBGRendererInstance2D))]
 	public class ParallaxBGRendererInstance2DEditor : DTEditor<ParallaxBGRendererInstance2D> {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		public override void OnInspectorGUI() {
 			// DEPTH
 			_object.Depth = EditorGUILayout.IntSlider("Depth", _object.Depth, 0, _object.MaxDepth);

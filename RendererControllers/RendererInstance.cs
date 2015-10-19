@@ -7,7 +7,7 @@ using System.Linq;
 namespace DT {
 	[ExecuteInEditMode]
 	public class RendererInstance : MaterialInstanceBase {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		protected Renderer[] Renderers {
 			get { 
 				return this.GetComponentsInChildren<Renderer>(); 

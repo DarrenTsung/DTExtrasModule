@@ -5,7 +5,7 @@ using System.Collections;
 namespace DT {
 	[ExecuteInEditMode]
 	public class PulseShaderRendererInstance2D : RendererInstance2D {
-		// PRAGMA MARK - INTERFACE 
+		// PRAGMA MARK - Interface 
 		public bool Pulsing {
 			get { return _pulsing; }
 			set {
@@ -13,7 +13,7 @@ namespace DT {
 			}
 		}
 		
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		[SerializeField]
 		public bool _pulsing;
 		[SerializeField]

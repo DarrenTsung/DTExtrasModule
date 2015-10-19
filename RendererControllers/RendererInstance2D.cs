@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace DT {
 	public class RendererInstance2D : RendererInstance {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		[SerializeField]
 		protected Texture2D _mainTexture;
 		

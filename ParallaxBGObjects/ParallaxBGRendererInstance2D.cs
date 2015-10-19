@@ -7,7 +7,7 @@ using System.Collections;
 namespace DT.ParallaxBackgrounds {
 	[ExecuteInEditMode]
 	public class ParallaxBGRendererInstance2D : RendererInstance2D {
-		// PRAGMA MARK - INTERFACE
+		// PRAGMA MARK - Interface
 		public int Depth {
 			get { return _depth; }
 			set { 
@@ -67,7 +67,7 @@ namespace DT.ParallaxBackgrounds {
 			}
 		}
 		
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		[SerializeField]
 		protected int _depth = 0;
 		[SerializeField]

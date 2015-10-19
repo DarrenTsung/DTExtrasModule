@@ -26,7 +26,7 @@ namespace DT.Tweening {
 	}
 	
 	public class ChromaticAberrationFloatTarget : AbstractTweenTarget<ChromaticAberrationEffect, float> {
-		// PRAGMA MARK - INTERFACE
+		// PRAGMA MARK - Interface
 	  public ChromaticAberrationFloatTarget(ChromaticAberrationEffect target, ChromaticAberrationType targetType) {
 	    _target = target;
 	    _targetType = targetType;
@@ -49,7 +49,7 @@ namespace DT.Tweening {
 			}
 	  }
 	  
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 	  protected ChromaticAberrationType _targetType;
 	}
 }

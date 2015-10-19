@@ -7,7 +7,7 @@ using System.Linq;
 namespace DT {
 	[ExecuteInEditMode]
 	public class ImageEffectInstance : MaterialInstanceBase {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		protected override void Awake() {
 			base.Awake();
 			if (!SystemInfo.supportsImageEffects) {

@@ -7,7 +7,7 @@ using System.Linq;
 namespace DT {
 	[ExecuteInEditMode]
 	public class MaterialInstanceBase : MonoBehaviour {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		protected Material MaterialInstance {
 			get {
 				if (_material == null) {

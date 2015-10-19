@@ -5,7 +5,7 @@ using System.Collections;
 namespace DT {
 	[ExecuteInEditMode]
 	public class BurnShaderRendererInstance2D : RendererInstance2D {
-		// PRAGMA MARK - INTERNAL
+		// PRAGMA MARK - Internal
 		[SerializeField]
 		protected Texture2D _dissolveMap;
 		[SerializeField]
