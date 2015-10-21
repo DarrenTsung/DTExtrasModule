@@ -88,6 +88,8 @@ namespace DT.ParallaxBackgrounds {
 		}
 		
 		protected override void UpdateMaterial() {
+			base.UpdateMaterial();
+			
 		  this.MaterialInstance.SetFloat("_MaxDepth", _maxDepth);
 			this.MaterialInstance.SetFloat("_ColorBlendScale", _colorBlendScale);
 			this.MaterialInstance.SetColor("_ColorToBlendTo", _colorToBlendTo);

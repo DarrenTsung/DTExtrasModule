@@ -16,6 +16,15 @@ namespace DT {
 		
 		protected override void OnCreatedMaterial(Material mat) {
 			base.OnCreatedMaterial(mat);
+			
+			foreach (Renderer r in this.Renderers) {
+				r.sharedMaterial = mat;
+			}
+		}
+		
+		protected override void UpdateMaterial() {
+			base.UpdateMaterial();
+			
 			foreach (Renderer r in this.Renderers) {
 				r.sharedMaterial = this.MaterialInstance;
 			}

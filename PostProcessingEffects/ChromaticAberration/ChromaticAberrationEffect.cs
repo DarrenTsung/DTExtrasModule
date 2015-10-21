@@ -34,6 +34,8 @@ namespace DT {
 		}
 		
 		protected override void UpdateMaterial() {
+			base.UpdateMaterial();
+			
 			this.MaterialInstance.SetFloat("_AberrationOffset", _aberrationOffset);
 			
 			Vector2 computedAberrationDirection = _aberrationDirection.normalized;

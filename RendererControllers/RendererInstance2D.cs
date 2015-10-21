@@ -9,6 +9,8 @@ namespace DT {
 		protected Texture2D _mainTexture;
 		
 		protected override void UpdateMaterial() {
+			base.UpdateMaterial();
+			
 			this.MaterialInstance.SetTexture("_MainTex", _mainTexture); 
 		}
 	}

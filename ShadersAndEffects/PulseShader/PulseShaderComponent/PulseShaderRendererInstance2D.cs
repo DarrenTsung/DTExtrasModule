@@ -10,6 +10,7 @@ namespace DT {
 			get { return _pulsing; }
 			set {
 				_pulsing = value;
+				this.UpdateMaterial();
 			}
 		}
 		
@@ -29,6 +30,8 @@ namespace DT {
 		}
 		
 		protected override void UpdateMaterial() {
+			base.UpdateMaterial();
+			
 			this.MaterialInstance.SetInt("_Pulsing", (_pulsing) ? 1 : 0); 
 			this.MaterialInstance.SetFloat("_PulseSpeed", _pulseSpeed); 
 			this.MaterialInstance.SetColor("_PulseColor", _pulseColor);

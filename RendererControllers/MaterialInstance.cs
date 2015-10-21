@@ -27,8 +27,11 @@ namespace DT {
 		protected Material _material;
 		
 		protected virtual void Awake() {
-			this.UpdateMaterial();
 			this.RegisterNotifications();
+		}
+		
+		protected virtual void Start() {
+			this.UpdateMaterial();
 		}
 		
 		protected virtual void OnDisable() {
