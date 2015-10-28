@@ -91,6 +91,8 @@ Shader "Sprites/Default-PulseShader"
 				
 				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
 				float pulseValue = ((sin(_Time[1] * 2.0f * PI / _PulseSpeed) / 2.0f) + 0.5f);
+				
+				_PulseColor.a *= c.a;
 				c = lerp(c, _PulseColor, _Pulsing * pulseValue * _PulseColorPercentLerp);
 				c.rgb *= c.a;
 				return c;
