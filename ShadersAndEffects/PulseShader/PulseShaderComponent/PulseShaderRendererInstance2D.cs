@@ -16,7 +16,7 @@ namespace DT {
 		
 		// PRAGMA MARK - Internal
 		[SerializeField]
-		public bool _pulsing;
+		protected bool _pulsing;
 		[SerializeField]
 		protected float _pulseSpeed;
 		
