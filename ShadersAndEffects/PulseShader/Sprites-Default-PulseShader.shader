@@ -7,7 +7,7 @@ Shader "Sprites/Default-PulseShader"
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 		
 		_Pulsing ("Pulsing", Int) = 0
-		_PulseSpeed ("PulseSpeed", Float) = 0.4
+		_PulseValue ("Pulse Value", Float) = 0.0
 		
 		_PulseColor ("Pulse Color", Color) = (1, 1, 1, 1)
 		_PulseColorPercentLerp ("Pulse Color Percent Lerp", Float) = 0.5
@@ -71,7 +71,7 @@ Shader "Sprites/Default-PulseShader"
 			float _AlphaSplitEnabled;
 			
 		 	int _Pulsing;
-			float _PulseSpeed;
+			float _PulseValue;
 			
 			fixed4 _PulseColor;
 			float _PulseColorPercentLerp;
@@ -90,10 +90,9 @@ Shader "Sprites/Default-PulseShader"
 				const float PI = 3.14159;
 				
 				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
-				float pulseValue = ((sin(_Time[1] * 2.0f * PI / _PulseSpeed) / 2.0f) + 0.5f);
 				
 				_PulseColor.a *= c.a;
-				c = lerp(c, _PulseColor, _Pulsing * pulseValue * _PulseColorPercentLerp);
+				c = lerp(c, _PulseColor, _Pulsing * _PulseValue * _PulseColorPercentLerp);
 				c.rgb *= c.a;
 				return c;
 			}
