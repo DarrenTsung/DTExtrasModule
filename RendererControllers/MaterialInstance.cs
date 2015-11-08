@@ -27,6 +27,7 @@ namespace DT {
 		protected Material _material;
 		
 		protected virtual void Awake() {
+			this.DestroyMaterial();
 			this.RegisterNotifications();
 		}
 		
@@ -35,14 +36,19 @@ namespace DT {
 		}
 		
 		protected virtual void OnDisable() {
-			if (_material != null) {
-				GameObject.DestroyImmediate(_material);
-			}
+			this.DestroyMaterial();
 			this.RemoveNotifications();
 		}
 		
 		protected virtual void OnValidate() {
 			this.UpdateMaterial();
+		}
+		
+		protected void DestroyMaterial() {
+			if (_material != null) {
+				GameObject.DestroyImmediate(_material);
+			}
+			_material = null;
 		}
 		
 		protected virtual void RegisterNotifications() {
