@@ -10,7 +10,7 @@ namespace DT {
 		// 	.SetEaseType(EaseType.ElasticOut)
 		// 	.Start();
 		
-		// PRAGMA MARK - Interface
+		// PRAGMA MARK - Public Interface
 		public float AberrationOffset {
 			get { return _aberrationOffset; }
 			set { 

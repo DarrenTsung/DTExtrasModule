@@ -5,7 +5,7 @@ using System.Collections;
 namespace DT {
 	[ExecuteInEditMode]
 	public class PulseShaderRendererInstance2D : RendererInstance2D {
-		// PRAGMA MARK - Interface 
+		// PRAGMA MARK - Public Interface 
 		public bool Pulsing {
 			get { return _pulsing; }
 			set {

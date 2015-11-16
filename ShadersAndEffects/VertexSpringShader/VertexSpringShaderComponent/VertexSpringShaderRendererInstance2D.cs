@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace DT {
 	[ExecuteInEditMode]
 	public class VertexSpringShaderRendererInstance2D : RendererInstance2D {
-		// PRAGMA MARK - Interface 
+		// PRAGMA MARK - Public Interface 
 		public void SetSpringTarget(string name, Vector3 target) {
 			_springTargets[name] = target;
 		}

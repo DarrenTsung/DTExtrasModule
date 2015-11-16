@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DT {
 	public class InteractionZoneController : MonoBehaviour {
-		// PRAGMA MARK - Interface
+		// PRAGMA MARK - Public Interface
 		public void Interact(InteractionActorController actor) {
 			_delegate.Interact(actor);
 		}
