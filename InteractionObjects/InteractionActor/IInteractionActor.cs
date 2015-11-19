@@ -7,6 +7,6 @@ namespace DT {
 		void EnteredZone(int zoneType, InteractionZoneController zone);
 		void ExitedZone(int zoneType, InteractionZoneController zone);
 		bool IsClosestZone(int zoneType, InteractionZoneController zone);
-		void InteractWithZoneType(int zoneType);
+		bool InteractWithZoneType(int zoneType);
 	}
 }

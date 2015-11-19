@@ -17,13 +17,16 @@ public class InteractionActorController : MonoBehaviour, IInteractionActor {
 		return this.ClosestInteractionZoneForType(zoneType) == zone;
 	}
 
-	void IInteractionActor.InteractWithZoneType(int zoneType) {
+	bool IInteractionActor.InteractWithZoneType(int zoneType) {
 		this.UpdateClosestInteractionZone();
 		
 		InteractionZoneController zone = this.ClosestInteractionZoneForType(zoneType);
 		if (zone != null) {
 			zone.Interact(this);
+			return true;
 		}
+		
+		return false;
 	}
 	
 	
