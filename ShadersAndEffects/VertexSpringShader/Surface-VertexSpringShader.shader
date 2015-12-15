@@ -37,13 +37,13 @@
 		float _SpringValueZ;
 		
 		void vert (inout appdata_full v) {
-			float heightFactor = min(v.vertex.y - _SmallestVertexY, _Height) / _Height;
+			float3 pos = mul(_Object2World, v.vertex).xyz;
+			float heightFactor = min(pos.y - _SmallestVertexY, _Height) / _Height;
 			
 			float squaredMagnitude = (_SpringValueX * _SpringValueX)  + (_SpringValueZ * _SpringValueZ);
 			
-			v.vertex.x += _SpringValueX * heightFactor;
-			v.vertex.z += _SpringValueZ * heightFactor;
-			v.vertex.y -= squaredMagnitude;
+			float4 vertexOffset = float4(_SpringValueX * heightFactor, 0.0f, _SpringValueZ * heightFactor, 0.0f);
+			v.vertex += mul(_World2Object, vertexOffset);
 		}
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {

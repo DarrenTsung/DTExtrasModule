@@ -8,9 +8,21 @@ namespace DT {
 	[ExecuteInEditMode]
 	public class RendererInstance : MaterialInstanceBase {
 		// PRAGMA MARK - Internal
+		[SerializeField]
+		protected bool _affectChildren = false;
+		
 		protected Renderer[] Renderers {
 			get { 
-				return this.GetComponentsInChildren<Renderer>(); 
+				if (_affectChildren) {
+					return this.GetRenderersWithoutInstancesInChildren();
+				} else {
+					Renderer r = this.GetComponent<Renderer>();
+					if (r != null) {
+						return new Renderer[] { r };
+					} else {
+						return new Renderer[0];
+					}
+				}
 			}
 		}
 		
@@ -28,6 +40,29 @@ namespace DT {
 			foreach (Renderer r in this.Renderers) {
 				r.sharedMaterial = this.MaterialInstance;
 			}
+		}
+		
+		private Renderer[] GetRenderersWithoutInstancesInChildren() {
+			List<Renderer> renderers = new List<Renderer>();
+			
+			Queue<Transform> transformQueue = new Queue<Transform>();
+			transformQueue.Enqueue(transform);
+			while (transformQueue.Count > 0) {
+				Transform t = transformQueue.Dequeue();
+				GameObject g = t.gameObject;
+				RendererInstance instance = g.GetComponent<RendererInstance>();
+				if (instance == null) {
+					Renderer r = g.GetComponent<Renderer>();
+					if (r != null) {
+						renderers.Add(r);
+					}
+					foreach (Transform child in t) {
+						transformQueue.Enqueue(child);
+					}
+				}
+			}
+			
+			return renderers.ToArray();
 		}
 	}
 }
