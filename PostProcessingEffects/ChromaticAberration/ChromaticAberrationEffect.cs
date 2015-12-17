@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace DT {
 	[ExecuteInEditMode]
-	public class ChromaticAberrationEffect : ImageEffectInstance, ICustomEditor {
+	[CustomExtensionInspector]
+	public class ChromaticAberrationEffect : ImageEffectInstance {
 		// Example Tweening 
 		// this.AberrationOffsetTween(from: 1.0f, to: 0.0f, duration: 0.3f)
 		// 	.SetEaseType(EaseType.ElasticOut)
