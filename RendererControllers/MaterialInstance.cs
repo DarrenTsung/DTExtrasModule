@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace DT {
 	[ExecuteInEditMode]
+	[CustomExtensionInspector]
 	public class MaterialInstanceBase : MonoBehaviour {
 		// PRAGMA MARK - Internal
 		protected Material MaterialInstance {
@@ -41,6 +42,12 @@ namespace DT {
 		}
 		
 		protected virtual void OnValidate() {
+			this.UpdateMaterial();
+		}
+		
+		[MakeButton]
+		public void RecreateMaterial() {
+			this.DestroyMaterial();
 			this.UpdateMaterial();
 		}
 		

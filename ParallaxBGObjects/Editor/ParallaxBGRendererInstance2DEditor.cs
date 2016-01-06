@@ -2,13 +2,33 @@ using DT;
 using System.Collections;
 using System.Collections.Generic;
 ﻿using UnityEditor;
+using UnityEditor.AnimatedValues;
 ﻿using UnityEngine;
 
 namespace DT.ParallaxBackgrounds {
 	[CustomEditor(typeof(ParallaxBGRendererInstance2D))]
 	public class ParallaxBGRendererInstance2DEditor : DTEditor<ParallaxBGRendererInstance2D> {
 		// PRAGMA MARK - Internal
+		protected AnimBool _showDefaultInspector;
+		
+		protected override void OnEnable() {
+			base.OnEnable();
+			
+			_showDefaultInspector = new AnimBool(false);
+			_showDefaultInspector.valueChanged.AddListener(Repaint);
+		}
+		
 		public override void OnInspectorGUI() {
+			_showDefaultInspector.target = EditorGUILayout.ToggleLeft("Show default inspector", _showDefaultInspector.target);
+
+			//Extra block that can be toggled on and off.
+			if (EditorGUILayout.BeginFadeGroup(_showDefaultInspector.faded)) {
+				EditorGUI.indentLevel++;
+				this.DrawDefaultInspector();
+				EditorGUI.indentLevel--;
+			}
+			EditorGUILayout.EndFadeGroup();
+			
 			// DEPTH
 			_object.Depth = EditorGUILayout.IntSlider("Depth", _object.Depth, 0, _object.MaxDepth);
 			_object.MaxDepth = EditorGUILayout.IntField("Max Depth", _object.MaxDepth);
@@ -39,6 +59,10 @@ namespace DT.ParallaxBackgrounds {
 			
 			float computedSize = 1.0f - (relativeDepth * _object.SizeReductionScale);
 			EditorGUILayout.LabelField("Size = " + computedSize.ToPercentageString());
+			
+			if (GUILayout.Button("Recreate Material")) {
+				_object.RecreateMaterial();
+			}
 			
 			base.OnInspectorGUI();
 		}

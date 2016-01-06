@@ -46,7 +46,11 @@ namespace DT {
 			List<Renderer> renderers = new List<Renderer>();
 			
 			Queue<Transform> transformQueue = new Queue<Transform>();
-			transformQueue.Enqueue(transform);
+			// enqueue children first
+			foreach (Transform child in transform) {
+				transformQueue.Enqueue(child);
+			}
+			
 			while (transformQueue.Count > 0) {
 				Transform t = transformQueue.Dequeue();
 				GameObject g = t.gameObject;
