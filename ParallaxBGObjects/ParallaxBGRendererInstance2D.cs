@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 ﻿using UnityEngine;
 
-namespace DT.ParallaxBackgrounds {
+namespace DT.Extras {
 	[ExecuteInEditMode]
 	public class ParallaxBGRendererInstance2D : RendererInstance2D {
 		// PRAGMA MARK - Public Interface
@@ -12,6 +12,7 @@ namespace DT.ParallaxBackgrounds {
 			set {
 				_depth = value;
 				transform.position = transform.position.SetZ(_depth);
+        this._computedRelativeDepth = null;
 				this.RecomputeSortingOrder();
 			}
 		}
@@ -29,7 +30,12 @@ namespace DT.ParallaxBackgrounds {
 		}
 
 		public float RelativeDepth {
-			get { return Mathf.Clamp((float)this.Depth / (float)this.MaxDepth, 0.0f, 1.0f); }
+			get {
+        if (this._computedRelativeDepth == null) {
+          this._computedRelativeDepth = Mathf.Clamp((float)this.Depth / (float)this.MaxDepth, 0.0f, 1.0f);
+        }
+        return (float)this._computedRelativeDepth;
+      }
 		}
 
 		public int MaxDepth {
@@ -75,6 +81,8 @@ namespace DT.ParallaxBackgrounds {
 		protected Color _colorToBlendTo = Color.white;
 		[SerializeField]
 		protected float _sizeReductionScale = 0.5f;
+
+    protected float? _computedRelativeDepth;
 
 		protected override string ShaderName() {
 			return "Sprites/Default-BackgroundArt";
