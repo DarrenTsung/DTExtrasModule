@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DT {
 	[ExecuteInEditMode]
-	[CustomExtensionInspector]
+	[CustomInspector]
 	public class MaterialInstanceBase : MonoBehaviour {
 		// PRAGMA MARK - Internal
 		protected Material MaterialInstance {
