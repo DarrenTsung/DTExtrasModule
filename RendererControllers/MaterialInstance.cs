@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace DT {
 	[ExecuteInEditMode]
-	[CustomInspector]
 	public class MaterialInstanceBase : MonoBehaviour {
 		// PRAGMA MARK - Internal
 		protected Material MaterialInstance {
@@ -19,57 +18,57 @@ namespace DT {
 				return _material;
 			}
 		}
-		
+
 		protected virtual void OnCreatedMaterial(Material mat) {
 			// do nothing
 		}
-		
+
 		[SerializeField]
 		protected Material _material;
-		
+
 		protected virtual void Awake() {
 			this.DestroyMaterial();
 			this.RegisterNotifications();
 		}
-		
+
 		protected virtual void Start() {
 			this.UpdateMaterial();
 		}
-		
+
 		protected virtual void OnDisable() {
 			this.DestroyMaterial();
 			this.RemoveNotifications();
 		}
-		
+
 		protected virtual void OnValidate() {
 			this.UpdateMaterial();
 		}
-		
+
 		[MakeButton]
 		public void RecreateMaterial() {
 			this.DestroyMaterial();
 			this.UpdateMaterial();
 		}
-		
+
 		protected void DestroyMaterial() {
 			if (_material != null) {
 				GameObject.DestroyImmediate(_material);
 			}
 			_material = null;
 		}
-		
+
 		protected virtual void RegisterNotifications() {
 			// do nothing
 		}
-		
+
 		protected virtual void RemoveNotifications() {
 			// do nothing
 		}
-		
+
 		protected virtual void UpdateMaterial() {
 			// do nothing in base
 		}
-		
+
 		protected virtual string ShaderName() {
 			return "Sprites/Default";
 		}

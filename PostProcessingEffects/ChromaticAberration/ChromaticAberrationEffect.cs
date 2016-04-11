@@ -4,22 +4,21 @@ using UnityEngine;
 
 namespace DT {
 	[ExecuteInEditMode]
-	[CustomInspector]
 	public class ChromaticAberrationEffect : ImageEffectInstance {
-		// Example Tweening 
+		// Example Tweening
 		// this.AberrationOffsetTween(from: 1.0f, to: 0.0f, duration: 0.3f)
 		// 	.SetEaseType(EaseType.ElasticOut)
 		// 	.Start();
-		
+
 		// PRAGMA MARK - Public Interface
 		public float AberrationOffset {
 			get { return _aberrationOffset; }
-			set { 
-				_aberrationOffset = value; 
+			set {
+				_aberrationOffset = value;
 				this.UpdateMaterial();
 			}
 		}
-		
+
 		// PRAGMA MARK - Internal
 		[SerializeField, Range(0.0f, 3.0f)]
 		protected float _aberrationOffset = 1.0f;
@@ -29,16 +28,16 @@ namespace DT {
 		protected Color _forwardChannelColor = Color.blue;
 		[SerializeField]
 		protected Color _backChannelColor = Color.red;
-		
+
 		protected override string ShaderName() {
 			return "ImageEffects/ChromaticAberration";
 		}
-		
+
 		protected override void UpdateMaterial() {
 			base.UpdateMaterial();
-			
+
 			this.MaterialInstance.SetFloat("_AberrationOffset", _aberrationOffset);
-			
+
 			Vector2 computedAberrationDirection = _aberrationDirection.normalized;
 			this.MaterialInstance.SetFloat("_OffsetX", computedAberrationDirection.x);
 			this.MaterialInstance.SetFloat("_OffsetY", computedAberrationDirection.y);
